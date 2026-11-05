@@ -1,89 +1,73 @@
-# I tried to teach a small model to use a computer
+# Post-training a 7B vision-language model to use a computer
 
-I wanted a model that could sit down at a computer and do what I do when something is broken.
+I post-trained [Qwen2.5-VL-7B](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) to complete a desktop coding loop: open Jupyter, write or edit code, run it, read the output, and apply a fix when needed. The untrained model scored 0/24 on a held-out test set.
 
-Open Jupyter. Write a little code. Run it. Read the error. Fix the bug. Run it again.
+This write-up covers the task, the evaluation protocol, the training stages, and the measured results.
 
-The model I started with was [Qwen2.5-VL-7B](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct). It can see a screenshot and output actions: clicks, keystrokes, that kind of thing. In theory that is enough to use a computer. In practice, when I gave it a locked set of 24 tasks, it scored 0.
+## Task
 
-This is how I trained it, how I measured it, and what actually moved the score.
-
-## What "using a computer" meant here
-
-I did not want a chatbot that explains how to write a function. I wanted the model to operate the screen.
-
-The loop was always the same:
+The model receives a screenshot and outputs UI actions such as clicks and keystrokes. Each episode follows the same loop:
 
 1. Open Jupyter
-2. Write the code
+2. Write or edit code
 3. Run it
-4. Read whatever came back
-5. Fix the bug if there was one
+4. Read the output or traceback
+5. Apply a fix if needed
 6. Run it again
 
-I used Jupyter because that is what I could actually run. The tasks were things like: write a new function, debug a file I gave it, deal with a screen layout that had changed, or fix a `.py` file from the terminal only.
+The tasks included writing a new function, debugging a provided file, handling a changed window layout, and fixing a `.py` file from the terminal only. I used Jupyter because that is the environment I could run reliably.
 
-## How I kept myself honest
+## Evaluation
 
-The easy way to fool yourself with a project like this is to train on the same tasks you test on, or to trust the model when it says it is finished.
+I froze two test sets before training and did not use them as training data:
 
-I locked two test sets before training and never used them as training data:
+- **Original 24.** Write a new function, debug a provided file, handle a changed layout, or use the terminal only.
+- **Debug 35.** Five tasks each for seven bug types: syntax, indentation, name errors, wrong operator, off-by-one, wrong comparison, and a Python file fixed from the terminal.
 
-- **Original 24.** Write new functions, debug a provided file, handle a changed layout, or use the terminal only.
-- **Debug 35.** Five each of seven bug types: syntax, indentation, name errors, wrong operator, off-by-one, wrong comparison, and a Python file fixed from the terminal.
+A programmatic checker inspects files on disk (for example, whether a function exists or a script prints the expected output). If the model reports "done" and the checker fails, the episode is counted as a fail. I also track those cases separately as false "done" claims.
 
-An automatic checker looks at the files on disk. Does the function exist? Does the script print the right output? If the model says "done" and the file is still wrong, that is a fail. I called those false "done" claims, and there were a lot of them early on.
+For trained checkpoints I report the mean of 3 runs at temperature 0.2. The untrained score of 0/24 is from an earlier single run on the same original-24 set.
 
-When I compared the trained models, I ran each test set 3 times at temperature 0.2 and averaged the scores. The untrained base score of 0/24 comes from an earlier single run on the same original 24 tasks.
-
-You can check that the tests have not been edited:
+The frozen tests can be checked with:
 
 ```bash
 cd tests/original-24 && sha256sum -c FROZEN.sha256
 cd ../debug-35 && sha256sum -c FROZEN.sha256
 ```
 
-## First I just showed it how
+## Supervised fine-tuning
 
-I sat down and did the tasks myself. I recorded the successful runs: open Jupyter, edit the code, run it, read the output, then stop. Then I fine-tuned the model on those demonstrations so it would copy the behavior.
+I recorded successful demonstrations of the loop and fine-tuned the model on those traces.
 
-That taught the basic loop. On the original 24 tasks, the first fine-tune averaged 17.0 out of 24, or 71%. After I added more careful debugging demonstrations, it averaged 21.0 out of 24, or 88%.
+On the original 24 tasks, the first fine-tune averaged 17.0/24 (71%). After I added more careful debugging demonstrations, it averaged 21.0/24 (88%).
 
-The debugging set was the rude surprise. After that first round of demos, it only got 4.7 out of 35, which is 13%. And it claimed to be done about 30 times per run, on a set of 35 tasks. It had picked up the habit of clicking around. It had not picked up the habit of actually fixing the bug.
+On the debug set, the first fine-tune averaged 4.7/35 (13%), with about 30 false "done" claims per run. Typical failures were editing the wrong line, rewriting a test, applying a fix without rerunning the file, or reporting done after seeing an error.
 
-## The model was sloppy in a very specific way
-
-When I watched the failures, they were not mysterious.
-
-It would edit the wrong line. It would rewrite a test. It would type a fix and never run the file. Or it would run the file, see an error, and say it was finished anyway.
-
-Here is the last stretch of one of those failures, a NameError the early model did not actually fix:
+Here is the end of one of those failures, a NameError the early checkpoint did not fix:
 
 ![Before training, the model fails a NameError task](examples/before.gif)
 
-So I recorded pickier demonstrations. The rule was simple: change only the buggy line, run the code, read the output, and only then say done.
-
-That was the biggest jump in the whole project. Debugging went from 13% to 61% (21.3 / 35). False "done" claims dropped from 30.0 to 13.7.
+I then recorded demonstrations with a narrower edit policy: change only the buggy line, run the file, read the output, then stop. Debug-set accuracy went from 13% to 61% (21.3/35). False "done" claims dropped from 30.0 to 13.7.
 
 ![Debugging scores by bug type](results/debug_by_type.png)
 
-Some bug types moved a lot once the demos were more careful. Others barely moved. That is how I knew that generic "just show it more computer use" was not going to be enough.
+Improvement was uneven across bug types after those demonstrations.
 
-## Then I tried a little reinforcement learning
+## Reinforcement learning
 
-Imitation can only copy what you showed it. I still had cases the demos missed, so I ran a round of reinforcement learning (GRPO). The model got 8 attempts at a task. The ones that passed the checker were strengthened. The ones that failed, or that quit early, were pushed down. A small penalty kept it from drifting too far from the fine-tuned model.
+I ran one round of GRPO with group size 8. Trajectories that passed the checker were upweighted. Failures and early quits were downweighted. A penalty term limited drift from the fine-tuned model.
 
-One round took debugging from 61% to 70% (24.3 / 35). False "done" claims fell again, from 13.7 to 10.7. Most of that extra gain was on debugging, especially NameErrors.
+After that round, debug-set accuracy went from 61% to 70% (24.3/35). False "done" claims fell from 13.7 to 10.7. Most of the gain was on debugging tasks, particularly name errors.
 
-Here is the same kind of NameError after that training:
+Here is a NameError episode after that training:
 
 ![After training, the model fixes a NameError task](examples/after.gif)
 
-A sped-up before-and-after of the full attempts is in [`examples/before-after.mp4`](examples/before-after.mp4).
+A sped-up comparison of the full attempts is in [`examples/before-after.mp4`](examples/before-after.mp4).
 
-It did not beat the demo-trained model on the original 24 tasks. After reinforcement learning it averaged 20.7 / 24 (86%), compared with 21.0 / 24 (88%) after the better demonstrations.
+On the original 24 tasks, the RL checkpoint averaged 20.7/24 (86%). The second supervised run averaged 21.0/24 (88%).
 
-I ran a second round. It tied the first, on both test sets. So I stopped.
+A second RL round matched the first round on both test sets. I stopped after that.
 
 ![Overall scores](results/overall.png)
 
@@ -93,12 +77,12 @@ I ran a second round. It tied the first, on both test sets. So I stopped.
 | After more targeted demos | **21.0 / 24 (88%)** | 21.3 / 35 (61%) |
 | After one round of RL | 20.7 / 24 (86%) | **24.3 / 35 (70%)** |
 
-## What this cost, and what I would still change
+## Cost and remaining errors
 
-I do not have a GPU on the machine I was using, so I rented some for the last training stage. That stage cost about $12.
+The last training stage ran on rented GPUs and cost about $12.
 
-I would not spend more just to run another reinforcement learning round. The second round already told me I had plateaued. If I picked this up again, I would look at the bugs that are still hard, especially off-by-one errors, and record demonstrations that are picky about those, rather than hoping more generic training would smooth them out.
+I would not run another RL round on this setup. If I continued, I would look at the remaining failures, especially off-by-one errors, and collect demonstrations for those cases.
 
-The model can use a computer now, in this narrow sense. It can open Jupyter, write code, run it, and often fix what it broke. It still says "done" sometimes when it is not, and it still misses tasks a person would catch.
+The trained model can open Jupyter, write code, run it, and often apply a correct fix. It still reports "done" on some failing episodes, and it still misses tasks that a person would catch.
 
-The code, the locked tests, and the charts are in this repo: [computer-use-post-training](https://github.com/SarnadAbhilash/computer-use-post-training).
+The code, frozen tests, and charts are in [computer-use-post-training](https://github.com/SarnadAbhilash/computer-use-post-training).
