@@ -6,14 +6,55 @@ This write-up covers the task, the evaluation protocol, the training stages, and
 
 ## Task
 
-The model receives a screenshot and outputs UI actions such as clicks and keystrokes. Each episode follows the same loop:
+The model receives a screenshot and outputs UI actions such as clicks and keystrokes. Each episode follows the same loop. The stills and clips below are from one held-out NameError task (`repair_has_digit`) after training.
 
 1. Open Jupyter
+
+JupyterLab after the model opens `repair_has_digit.ipynb`.
+
+![Open Jupyter](examples/steps/01-open-jupyter.jpg)
+
+Clip: [01-open-jupyter.mp4](examples/steps/01-open-jupyter.mp4)
+
 2. Write or edit code
+
+The provided cell. The print call uses `has_digi` instead of `has_digit`.
+
+![Write or edit code](examples/steps/02-edit-code.jpg)
+
+Clip: [02-edit-code.mp4](examples/steps/02-edit-code.mp4)
+
 3. Run it
+
+The first execution of that cell (execution count `[1]`).
+
+![Run the cell](examples/steps/03-run.jpg)
+
+Clip: [03-run.mp4](examples/steps/03-run.mp4)
+
 4. Read the output or traceback
+
+`NameError: name 'has_digi' is not defined`.
+
+![Read the traceback](examples/steps/04-read-traceback.jpg)
+
+Clip: [04-read-traceback.mp4](examples/steps/04-read-traceback.mp4)
+
 5. Apply a fix if needed
+
+The print call corrected to `has_digit`.
+
+![Apply a fix](examples/steps/05-apply-fix.jpg)
+
+Clip: [05-apply-fix.mp4](examples/steps/05-apply-fix.mp4)
+
 6. Run it again
+
+The second run prints `True`.
+
+![Run again](examples/steps/06-run-again.jpg)
+
+Clip: [06-run-again.mp4](examples/steps/06-run-again.mp4)
 
 The tasks included writing a new function, debugging a provided file, handling a changed window layout, and fixing a `.py` file from the terminal only. I used Jupyter because that is the environment I could run reliably.
 
@@ -76,13 +117,5 @@ A second RL round matched the first round on both test sets. I stopped after tha
 | After early fine-tuning | 17.0 / 24 (71%) | 4.7 / 35 (13%) |
 | After more targeted demos | **21.0 / 24 (88%)** | 21.3 / 35 (61%) |
 | After one round of RL | 20.7 / 24 (86%) | **24.3 / 35 (70%)** |
-
-## Cost and remaining errors
-
-The last training stage ran on rented GPUs and cost about $12.
-
-I would not run another RL round on this setup. If I continued, I would look at the remaining failures, especially off-by-one errors, and collect demonstrations for those cases.
-
-The trained model can open Jupyter, write code, run it, and often apply a correct fix. It still reports "done" on some failing episodes, and it still misses tasks that a person would catch.
 
 The code, frozen tests, and charts are in [computer-use-post-training](https://github.com/SarnadAbhilash/computer-use-post-training).
