@@ -1,5 +1,7 @@
 # Post-training a 7B vision-language model to use a computer
 
+![The coding loop after training: open Jupyter, read a NameError, and rerun a passing fix](examples/banner.jpg)
+
 I post-trained [Qwen2.5-VL-7B](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) to complete a desktop coding loop: open Jupyter, write or edit code, run it, read the output, and apply a fix when needed. The untrained model scored 0/24 on a held-out test set.
 
 This write-up covers the task, the evaluation protocol, the training stages, and the measured results.

@@ -9,3 +9,5 @@ Two short recordings of the same locked NameError debugging task (`x4_nameerror_
 
 `steps/` has a still and a short clip for each step of the coding loop, taken from `after_grpo_nameerror_success.mp4`:
 open Jupyter, edit the cell, run it, read the NameError, apply the one-line fix, and run it again.
+
+`banner.jpg` is the article header image, assembled from three frames of that same run.
