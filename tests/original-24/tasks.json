@@ -1,0 +1,879 @@
+[
+ {
+  "id": "t1_multiply",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function multiply_pair(p, q) that returns the product of two numbers, call it on 6 and 7 and print the result, run it, fix any errors, and save the notebook as mult_check.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "multiply_pair",
+    "tests": [
+     [
+      [
+       3,
+       5
+      ],
+      15
+     ],
+     [
+      [
+       -2,
+       8
+      ],
+      -16
+     ],
+     [
+      [
+       0.5,
+       4
+      ],
+      2.0
+     ]
+    ],
+    "expected_output": "42",
+    "notebook": "mult_check.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_maxlist",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function largest(values) that returns the maximum of a list, print largest([4, 19, 2]), run it, fix any errors, and save the notebook as maxlist.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "largest",
+    "tests": [
+     [
+      [
+       [
+        1,
+        9,
+        3
+       ]
+      ],
+      9
+     ],
+     [
+      [
+       [
+        -5,
+        -2,
+        -7
+       ]
+      ],
+      -2
+     ],
+     [
+      [
+       [
+        42
+       ]
+      ],
+      42
+     ]
+    ],
+    "expected_output": "19",
+    "notebook": "maxlist.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_reverse",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function reverse_text(s) that returns the string reversed, print reverse_text('stressed'), run it, fix any errors, and save the notebook as rev.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "reverse_text",
+    "tests": [
+     [
+      [
+       "abc"
+      ],
+      "cba"
+     ],
+     [
+      [
+       "racecar"
+      ],
+      "racecar"
+     ],
+     [
+      [
+       ""
+      ],
+      ""
+     ]
+    ],
+    "expected_output": "desserts",
+    "notebook": "rev.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_iseven",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function is_even(n) that returns True if n is even and False otherwise, print is_even(10), run it, fix any errors, and save the notebook as parity.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "is_even",
+    "tests": [
+     [
+      [
+       4
+      ],
+      true
+     ],
+     [
+      [
+       7
+      ],
+      false
+     ],
+     [
+      [
+       0
+      ],
+      true
+     ],
+     [
+      [
+       -3
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "parity.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_factorial",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function factorial(n) that returns n factorial, print factorial(5), run it, fix any errors, and save the notebook as fact.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "factorial",
+    "tests": [
+     [
+      [
+       0
+      ],
+      1
+     ],
+     [
+      [
+       1
+      ],
+      1
+     ],
+     [
+      [
+       6
+      ],
+      720
+     ],
+     [
+      [
+       10
+      ],
+      3628800
+     ]
+    ],
+    "expected_output": "120",
+    "notebook": "fact.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_square",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function square(n) that returns n squared, print square(9), run it, fix any errors, and save the notebook as sq.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "square",
+    "tests": [
+     [
+      [
+       3
+      ],
+      9
+     ],
+     [
+      [
+       -4
+      ],
+      16
+     ],
+     [
+      [
+       1.5
+      ],
+      2.25
+     ]
+    ],
+    "expected_output": "81",
+    "notebook": "sq.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_vowels",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function count_vowels(s) that returns how many vowels (a, e, i, o, u) are in a lowercase string, print count_vowels('education'), run it, fix any errors, and save the notebook as vowels.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "count_vowels",
+    "tests": [
+     [
+      [
+       "banana"
+      ],
+      3
+     ],
+     [
+      [
+       "sky"
+      ],
+      0
+     ],
+     [
+      [
+       "aeiou"
+      ],
+      5
+     ]
+    ],
+    "expected_output": "5",
+    "notebook": "vowels.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t1_average",
+  "tier": "T1",
+  "instruction": "Open a coding environment (Jupyter), write a Python function average(nums) that returns the mean of a list of numbers, print average([2, 4, 9]), run it, fix any errors, and save the notebook as avg.ipynb.",
+  "max_steps": 30,
+  "start": {},
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "average",
+    "tests": [
+     [
+      [
+       [
+        1,
+        2,
+        3
+       ]
+      ],
+      2.0
+     ],
+     [
+      [
+       [
+        10
+       ]
+      ],
+      10.0
+     ],
+     [
+      [
+       [
+        -1,
+        1
+       ]
+      ],
+      0.0
+     ]
+    ],
+    "expected_output": "5.0",
+    "notebook": "avg.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t2_nameerror",
+  "tier": "T2",
+  "instruction": "The notebook buggy_area.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (rect_area(w, h) should return the area of a rectangle.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "buggy_area.ipynb"
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "rect_area",
+    "tests": [
+     [
+      [
+       2,
+       5
+      ],
+      10
+     ],
+     [
+      [
+       7,
+       7
+      ],
+      49
+     ]
+    ],
+    "expected_output": "12",
+    "notebook": "buggy_area.ipynb",
+    "strict_name": true
+   }
+  }
+ },
+ {
+  "id": "t2_syntax",
+  "tier": "T2",
+  "instruction": "The notebook buggy_total.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (total(xs) should return the sum of a list.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "buggy_total.ipynb"
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "total",
+    "tests": [
+     [
+      [
+       [
+        5,
+        5
+       ]
+      ],
+      10
+     ],
+     [
+      [
+       []
+      ],
+      0
+     ]
+    ],
+    "expected_output": "10",
+    "notebook": "buggy_total.ipynb",
+    "strict_name": true
+   }
+  }
+ },
+ {
+  "id": "t2_logic_temp",
+  "tier": "T2",
+  "instruction": "The notebook buggy_temp.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (celsius_to_f(c) should convert Celsius to Fahrenheit; 100 C is 212 F.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "buggy_temp.ipynb"
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "celsius_to_f",
+    "tests": [
+     [
+      [
+       0
+      ],
+      32.0
+     ],
+     [
+      [
+       -40
+      ],
+      -40.0
+     ],
+     [
+      [
+       37
+      ],
+      98.6
+     ]
+    ],
+    "expected_output": "212",
+    "notebook": "buggy_temp.ipynb",
+    "strict_name": true
+   }
+  }
+ },
+ {
+  "id": "t2_logic_bigger",
+  "tier": "T2",
+  "instruction": "The notebook buggy_bigger.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (bigger(a, b) should return the larger of two numbers.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "buggy_bigger.ipynb"
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "bigger",
+    "tests": [
+     [
+      [
+       1,
+       2
+      ],
+      2
+     ],
+     [
+      [
+       9,
+       -3
+      ],
+      9
+     ],
+     [
+      [
+       4,
+       4
+      ],
+      4
+     ]
+    ],
+    "expected_output": "8",
+    "notebook": "buggy_bigger.ipynb",
+    "strict_name": true
+   }
+  }
+ },
+ {
+  "id": "t2_indent",
+  "tier": "T2",
+  "instruction": "The notebook buggy_half.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (half(x) should return half of x.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "buggy_half.ipynb"
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "half",
+    "tests": [
+     [
+      [
+       10
+      ],
+      5.0
+     ],
+     [
+      [
+       3
+      ],
+      1.5
+     ]
+    ],
+    "expected_output": "4.5",
+    "notebook": "buggy_half.ipynb",
+    "strict_name": true
+   }
+  }
+ },
+ {
+  "id": "t2_py_terminal",
+  "tier": "T2",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "calc.py"
+   ]
+  },
+  "instruction": "The script calc.py in the current folder has a bug. Run it with python3 in the terminal, read the error, fix the bug in calc.py, and run it again until it prints the correct mean.",
+  "checker": {
+   "type": "py_script",
+   "args": {
+    "file": "calc.py",
+    "expected_stdout": "4.0",
+    "func": "mean",
+    "tests": [
+     [
+      [
+       [
+        1,
+        2,
+        3
+       ]
+      ],
+      2.0
+     ],
+     [
+      [
+       [
+        10,
+        20
+       ]
+      ],
+      15.0
+     ]
+    ],
+    "min_runs": 2
+   }
+  }
+ },
+ {
+  "id": "t3_res1024",
+  "tier": "T3",
+  "instruction": "Open a coding environment (Jupyter), write a Python function cube(n) that returns n cubed, print cube(4), run it, fix any errors, and save the notebook as cube.ipynb.",
+  "max_steps": 30,
+  "start": {
+   "w": 1024,
+   "h": 768,
+   "term": [
+    20,
+    20
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "cube",
+    "tests": [
+     [
+      [
+       2
+      ],
+      8
+     ],
+     [
+      [
+       -3
+      ],
+      -27
+     ]
+    ],
+    "expected_output": "64",
+    "notebook": "cube.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t3_res1440",
+  "tier": "T3",
+  "instruction": "Open a coding environment (Jupyter), write a Python function min_of_three(a, b, c) that returns the smallest of three numbers, print min_of_three(8, 3, 5), run it, fix any errors, and save the notebook as min3.ipynb.",
+  "max_steps": 30,
+  "start": {
+   "w": 1440,
+   "h": 900,
+   "term": [
+    100,
+    80
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "min_of_three",
+    "tests": [
+     [
+      [
+       1,
+       2,
+       3
+      ],
+      1
+     ],
+     [
+      [
+       9,
+       -1,
+       4
+      ],
+      -1
+     ],
+     [
+      [
+       5,
+       5,
+       5
+      ],
+      5
+     ]
+    ],
+    "expected_output": "3",
+    "notebook": "min3.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t3_distractor",
+  "tier": "T3",
+  "instruction": "Open a coding environment (Jupyter), write a Python function join_words(a, b) that returns the two strings joined with a single space, print join_words('held', 'out'), run it, fix any errors, and save the notebook as join.ipynb.",
+  "max_steps": 30,
+  "start": {
+   "term": [
+    250,
+    250
+   ],
+   "distractor": true
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "join_words",
+    "tests": [
+     [
+      [
+       "a",
+       "b"
+      ],
+      "a b"
+     ],
+     [
+      [
+       "hello",
+       "world"
+      ],
+      "hello world"
+     ]
+    ],
+    "expected_output": "held out",
+    "notebook": "join.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t3_popup",
+  "tier": "T3",
+  "instruction": "Open a coding environment (Jupyter), write a Python function abs_diff(a, b) that returns the absolute difference of two numbers, print abs_diff(3, 11), run it, fix any errors, and save the notebook as diff.ipynb.",
+  "max_steps": 30,
+  "start": {
+   "popup": true
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "abs_diff",
+    "tests": [
+     [
+      [
+       5,
+       2
+      ],
+      3
+     ],
+     [
+      [
+       2,
+       5
+      ],
+      3
+     ],
+     [
+      [
+       -1,
+       -1
+      ],
+      0
+     ]
+    ],
+    "expected_output": "8",
+    "notebook": "diff.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t3_jupyter_open",
+  "tier": "T3",
+  "instruction": "JupyterLab is already open. Write a Python function triple(n) that returns three times n, print triple(14), run it, fix any errors, and save the notebook as triple.ipynb.",
+  "max_steps": 30,
+  "start": {
+   "jupyter_open": true,
+   "term": [
+    60,
+    60
+   ]
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "triple",
+    "tests": [
+     [
+      [
+       1
+      ],
+      3
+     ],
+     [
+      [
+       -2
+      ],
+      -6
+     ],
+     [
+      [
+       0.5
+      ],
+      1.5
+     ]
+    ],
+    "expected_output": "42",
+    "notebook": "triple.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t3_filebrowser",
+  "tier": "T3",
+  "instruction": "Open a coding environment (Jupyter), write a Python function power(base, exp) that returns base raised to exp, print power(2, 10), run it, fix any errors, and save the notebook as power.ipynb. A file manager is open; there is no terminal yet.",
+  "max_steps": 30,
+  "start": {
+   "term": null,
+   "filebrowser": true
+  },
+  "checker": {
+   "type": "notebook_function",
+   "args": {
+    "func": "power",
+    "tests": [
+     [
+      [
+       3,
+       3
+      ],
+      27
+     ],
+     [
+      [
+       5,
+       0
+      ],
+      1
+     ],
+     [
+      [
+       2,
+       -1
+      ],
+      0.5
+     ]
+    ],
+    "expected_output": "1024",
+    "notebook": "power.ipynb",
+    "strict_name": false
+   }
+  }
+ },
+ {
+  "id": "t4_hello_py",
+  "tier": "T4",
+  "max_steps": 30,
+  "start": {},
+  "instruction": "Using the terminal, create a Python file greet.py that prints exactly Hello, heldout! and run it with python3.",
+  "checker": {
+   "type": "py_script",
+   "args": {
+    "file": "greet.py",
+    "expected_stdout": "Hello, heldout!"
+   }
+  }
+ },
+ {
+  "id": "t4_add3_py",
+  "tier": "T4",
+  "max_steps": 30,
+  "start": {},
+  "instruction": "Using the terminal, create a Python file add3.py that defines add_three(a, b, c) returning the sum of three numbers and prints add_three(1, 2, 3), then run it with python3.",
+  "checker": {
+   "type": "py_script",
+   "args": {
+    "file": "add3.py",
+    "expected_stdout": "6",
+    "func": "add_three",
+    "tests": [
+     [
+      [
+       4,
+       5,
+       6
+      ],
+      15
+     ],
+     [
+      [
+       -1,
+       0,
+       1
+      ],
+      0
+     ]
+    ]
+   }
+  }
+ },
+ {
+  "id": "t4_textfile",
+  "tier": "T4",
+  "max_steps": 30,
+  "start": {},
+  "instruction": "Using the terminal, create a text file named notes.txt in the current folder containing the line: evaluation complete",
+  "checker": {
+   "type": "text_file",
+   "args": {
+    "file": "notes.txt",
+    "must_contain": "evaluation complete"
+   }
+  }
+ },
+ {
+  "id": "t4_folder",
+  "tier": "T4",
+  "max_steps": 30,
+  "start": {},
+  "instruction": "Using the terminal, create a folder named results and inside it a file done.txt containing the word ok.",
+  "checker": {
+   "type": "text_file",
+   "args": {
+    "file": "results/done.txt",
+    "must_contain": "ok"
+   }
+  }
+ }
+]

@@ -1,0 +1,1847 @@
+[
+ {
+  "id": "x4_syntax_sq_list",
+  "family": "debug_nb",
+  "bug": "syntax",
+  "tier": "T2X",
+  "instruction": "The notebook repair_sq_list.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (sq_list(vals) should return every item in a list multiplied by itself.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_sq_list.ipynb"
+   ],
+   "term": [
+    176,
+    113
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "sq_list",
+    "tests": [
+     [
+      [
+       [
+        2,
+        3
+       ]
+      ],
+      [
+       4,
+       9
+      ]
+     ],
+     [
+      [
+       []
+      ],
+      []
+     ]
+    ],
+    "expected_output": "[1, 16, 36]",
+    "notebook": "repair_sq_list.ipynb",
+    "strict_name": true,
+    "test_line": "print(sq_list([1, 4, 6]))"
+   }
+  },
+  "solution": {
+   "code": "def sq_list(vals):\n    return [v * v for v in vals]\nprint(sq_list([1, 4, 6]))",
+   "bad": "def sq_list(vals)\n    return [v * v for v in vals]\nprint(sq_list([1, 4, 6]))",
+   "file": "repair_sq_list.ipynb",
+   "good_ret": "[v * v for v in vals]",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(sq_list([1, 4, 6]))"
+  }
+ },
+ {
+  "id": "x4_syntax_triangle_area",
+  "family": "debug_nb",
+  "bug": "syntax",
+  "tier": "T2X",
+  "instruction": "The notebook repair_triangle_area.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (triangle_area(b, h) should return the area of a triangle.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_triangle_area.ipynb"
+   ],
+   "term": [
+    43,
+    70
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "triangle_area",
+    "tests": [
+     [
+      [
+       4,
+       3
+      ],
+      6.0
+     ],
+     [
+      [
+       0,
+       5
+      ],
+      0.0
+     ]
+    ],
+    "expected_output": "15.0",
+    "notebook": "repair_triangle_area.ipynb",
+    "strict_name": true,
+    "test_line": "print(triangle_area(6, 5))"
+   }
+  },
+  "solution": {
+   "code": "# helper: triangle_area\ndef triangle_area(b, h):\n    return b * h / 2\nprint(triangle_area(6, 5))",
+   "bad": "# helper: triangle_area\ndef triangle_area(b, h)\n    return b * h / 2\nprint(triangle_area(6, 5))",
+   "file": "repair_triangle_area.ipynb",
+   "good_ret": "b * h / 2",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(triangle_area(6, 5))"
+  }
+ },
+ {
+  "id": "x4_syntax_rev_list",
+  "family": "debug_nb",
+  "bug": "syntax",
+  "tier": "T2X",
+  "instruction": "The notebook repair_rev_list.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (rev_list(vals) should return the list in reverse order.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_rev_list.ipynb"
+   ],
+   "term": [
+    294,
+    197
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "rev_list",
+    "tests": [
+     [
+      [
+       [
+        1,
+        2
+       ]
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     [
+      [
+       []
+      ],
+      []
+     ]
+    ],
+    "expected_output": "[9, 3, 2, 1]",
+    "notebook": "repair_rev_list.ipynb",
+    "strict_name": true,
+    "test_line": "print(rev_list([1, 2, 3, 9]))"
+   }
+  },
+  "solution": {
+   "code": "def rev_list(vals):\n    return vals[::-1]\n\nprint(rev_list([1, 2, 3, 9]))",
+   "bad": "def rev_list(vals)\n    return vals[::-1]\n\nprint(rev_list([1, 2, 3, 9]))",
+   "file": "repair_rev_list.ipynb",
+   "good_ret": "vals[::-1]",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(rev_list([1, 2, 3, 9]))"
+  }
+ },
+ {
+  "id": "x4_syntax_add_vat",
+  "family": "debug_nb",
+  "bug": "syntax",
+  "tier": "T2X",
+  "instruction": "The notebook repair_add_vat.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (add_vat(price) should return the price plus 20% VAT.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_add_vat.ipynb"
+   ],
+   "term": [
+    68,
+    71
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "add_vat",
+    "tests": [
+     [
+      [
+       10
+      ],
+      12.0
+     ],
+     [
+      [
+       0
+      ],
+      0.0
+     ]
+    ],
+    "expected_output": "60.0",
+    "notebook": "repair_add_vat.ipynb",
+    "strict_name": true,
+    "test_line": "print(add_vat(50))"
+   }
+  },
+  "solution": {
+   "code": "def add_vat(price):\n    return price * 1.2\nprint(add_vat(50))",
+   "bad": "def add_vat(price)\n    return price * 1.2\nprint(add_vat(50))",
+   "file": "repair_add_vat.ipynb",
+   "good_ret": "price * 1.2",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(add_vat(50))"
+  }
+ },
+ {
+  "id": "x4_syntax_word_count",
+  "family": "debug_nb",
+  "bug": "syntax",
+  "tier": "T2X",
+  "instruction": "The notebook repair_word_count.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (word_count(s) should return the number of words in a sentence.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_word_count.ipynb"
+   ],
+   "term": [
+    273,
+    128
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "word_count",
+    "tests": [
+     [
+      [
+       "a b c"
+      ],
+      3
+     ],
+     [
+      [
+       ""
+      ],
+      0
+     ]
+    ],
+    "expected_output": "4",
+    "notebook": "repair_word_count.ipynb",
+    "strict_name": true,
+    "test_line": "print(word_count('the quick fox jumps'))"
+   }
+  },
+  "solution": {
+   "code": "# helper: word_count\ndef word_count(s):\n    return len(s.split())\nprint(word_count('the quick fox jumps'))",
+   "bad": "# helper: word_count\ndef word_count(s)\n    return len(s.split())\nprint(word_count('the quick fox jumps'))",
+   "file": "repair_word_count.ipynb",
+   "good_ret": "len(s.split())",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(word_count('the quick fox jumps'))"
+  }
+ },
+ {
+  "id": "x4_indent_double_list",
+  "family": "debug_nb",
+  "bug": "indent",
+  "tier": "T2X",
+  "instruction": "The notebook repair_double_list.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (double_list(vals) should return a list with every item doubled.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_double_list.ipynb"
+   ],
+   "term": [
+    185,
+    62
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "double_list",
+    "tests": [
+     [
+      [
+       [
+        1,
+        2
+       ]
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     [
+      [
+       []
+      ],
+      []
+     ]
+    ],
+    "expected_output": "[6, 10]",
+    "notebook": "repair_double_list.ipynb",
+    "strict_name": true,
+    "test_line": "print(double_list([3, 5]))"
+   }
+  },
+  "solution": {
+   "code": "def double_list(vals):\n    return [v * 2 for v in vals]\nprint(double_list([3, 5]))",
+   "bad": "def double_list(vals):\nreturn [v * 2 for v in vals]\nprint(double_list([3, 5]))",
+   "file": "repair_double_list.ipynb",
+   "good_ret": "[v * 2 for v in vals]",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(double_list([3, 5]))"
+  }
+ },
+ {
+  "id": "x4_indent_dist_1d",
+  "family": "debug_nb",
+  "bug": "indent",
+  "tier": "T2X",
+  "instruction": "The notebook repair_dist_1d.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (dist_1d(a, b) should return the distance between two points on a line.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_dist_1d.ipynb"
+   ],
+   "term": [
+    17,
+    179
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "dist_1d",
+    "tests": [
+     [
+      [
+       1,
+       4
+      ],
+      3
+     ],
+     [
+      [
+       3,
+       3
+      ],
+      0
+     ]
+    ],
+    "expected_output": "11",
+    "notebook": "repair_dist_1d.ipynb",
+    "strict_name": true,
+    "test_line": "print(dist_1d(-2, 9))"
+   }
+  },
+  "solution": {
+   "code": "# helper: dist_1d\ndef dist_1d(a, b):\n    return abs(a - b)\nprint(dist_1d(-2, 9))",
+   "bad": "# helper: dist_1d\ndef dist_1d(a, b):\nreturn abs(a - b)\nprint(dist_1d(-2, 9))",
+   "file": "repair_dist_1d.ipynb",
+   "good_ret": "abs(a - b)",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(dist_1d(-2, 9))"
+  }
+ },
+ {
+  "id": "x4_indent_ends_dot",
+  "family": "debug_nb",
+  "bug": "indent",
+  "tier": "T2X",
+  "instruction": "The notebook repair_ends_dot.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (ends_dot(s) should return True if the text ends with a full stop.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_ends_dot.ipynb"
+   ],
+   "term": [
+    119,
+    143
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "ends_dot",
+    "tests": [
+     [
+      [
+       "ok."
+      ],
+      true
+     ],
+     [
+      [
+       "no"
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_ends_dot.ipynb",
+    "strict_name": true,
+    "test_line": "print(ends_dot('done.'))"
+   }
+  },
+  "solution": {
+   "code": "def ends_dot(s):\n    return s.endswith('.')\n\nprint(ends_dot('done.'))",
+   "bad": "def ends_dot(s):\nreturn s.endswith('.')\n\nprint(ends_dot('done.'))",
+   "file": "repair_ends_dot.ipynb",
+   "good_ret": "s.endswith('.')",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(ends_dot('done.'))"
+  }
+ },
+ {
+  "id": "x4_indent_inches",
+  "family": "debug_nb",
+  "bug": "indent",
+  "tier": "T2X",
+  "instruction": "The notebook repair_inches.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (inches(cm) should return centimetres converted to inches.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_inches.ipynb"
+   ],
+   "term": [
+    249,
+    18
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "inches",
+    "tests": [
+     [
+      [
+       2.54
+      ],
+      1.0
+     ],
+     [
+      [
+       0
+      ],
+      0.0
+     ]
+    ],
+    "expected_output": "5.0",
+    "notebook": "repair_inches.ipynb",
+    "strict_name": true,
+    "test_line": "print(inches(12.7))"
+   }
+  },
+  "solution": {
+   "code": "def inches(cm):\n    return cm / 2.54\nprint(inches(12.7))",
+   "bad": "def inches(cm):\nreturn cm / 2.54\nprint(inches(12.7))",
+   "file": "repair_inches.ipynb",
+   "good_ret": "cm / 2.54",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(inches(12.7))"
+  }
+ },
+ {
+  "id": "x4_indent_next_even",
+  "family": "debug_nb",
+  "bug": "indent",
+  "tier": "T2X",
+  "instruction": "The notebook repair_next_even.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (next_even(n) should return the next even number after n.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_next_even.ipynb"
+   ],
+   "term": [
+    258,
+    69
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "next_even",
+    "tests": [
+     [
+      [
+       3
+      ],
+      4
+     ],
+     [
+      [
+       4
+      ],
+      6
+     ]
+    ],
+    "expected_output": "12",
+    "notebook": "repair_next_even.ipynb",
+    "strict_name": true,
+    "test_line": "print(next_even(11))"
+   }
+  },
+  "solution": {
+   "code": "# helper: next_even\ndef next_even(n):\n    return n + 2 - n % 2\nprint(next_even(11))",
+   "bad": "# helper: next_even\ndef next_even(n):\nreturn n + 2 - n % 2\nprint(next_even(11))",
+   "file": "repair_next_even.ipynb",
+   "good_ret": "n + 2 - n % 2",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(next_even(11))"
+  }
+ },
+ {
+  "id": "x4_nameerror_circle_area",
+  "family": "debug_nb",
+  "bug": "nameerror",
+  "tier": "T2X",
+  "instruction": "The notebook repair_circle_area.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (circle_area(r) should return the area of a circle using pi = 3.14.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_circle_area.ipynb"
+   ],
+   "term": [
+    211,
+    177
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "circle_area",
+    "tests": [
+     [
+      [
+       1
+      ],
+      3.14
+     ],
+     [
+      [
+       0
+      ],
+      0.0
+     ]
+    ],
+    "expected_output": "314.0",
+    "notebook": "repair_circle_area.ipynb",
+    "strict_name": true,
+    "test_line": "print(circle_area(10))"
+   }
+  },
+  "solution": {
+   "code": "def circle_area(r):\n    return 3.14 * r * r\nprint(circle_area(10))",
+   "bad": "def circle_area(r):\n    return 3.14 * r * r\nprint(circle_are(10))",
+   "file": "repair_circle_area.ipynb",
+   "good_ret": "3.14 * r * r",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(circle_area(10))"
+  }
+ },
+ {
+  "id": "x4_nameerror_ends_same",
+  "family": "debug_nb",
+  "bug": "nameerror",
+  "tier": "T2X",
+  "instruction": "The notebook repair_ends_same.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (ends_same(s) should return True if the text starts and ends with the same character.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_ends_same.ipynb"
+   ],
+   "term": [
+    71,
+    115
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "ends_same",
+    "tests": [
+     [
+      [
+       "aba"
+      ],
+      true
+     ],
+     [
+      [
+       "ab"
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_ends_same.ipynb",
+    "strict_name": true,
+    "test_line": "print(ends_same('level'))"
+   }
+  },
+  "solution": {
+   "code": "# helper: ends_same\ndef ends_same(s):\n    return s[0] == s[-1]\nprint(ends_same('level'))",
+   "bad": "# helper: ends_same\ndef ends_same(s):\n    return s[0] == s[-1]\nprint(ends_sam('level'))",
+   "file": "repair_ends_same.ipynb",
+   "good_ret": "s[0] == s[-1]",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(ends_same('level'))"
+  }
+ },
+ {
+  "id": "x4_nameerror_area_square",
+  "family": "debug_nb",
+  "bug": "nameerror",
+  "tier": "T2X",
+  "instruction": "The notebook repair_area_square.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (area_square(s) should return s multiplied by itself (area of a tile with side s).)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_area_square.ipynb"
+   ],
+   "term": [
+    128,
+    33
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "area_square",
+    "tests": [
+     [
+      [
+       3
+      ],
+      9
+     ],
+     [
+      [
+       0
+      ],
+      0
+     ]
+    ],
+    "expected_output": "81",
+    "notebook": "repair_area_square.ipynb",
+    "strict_name": true,
+    "test_line": "print(area_square(9))"
+   }
+  },
+  "solution": {
+   "code": "def area_square(s):\n    return s * s\n\nprint(area_square(9))",
+   "bad": "def area_square(s):\n    return s * s\n\nprint(area_squar(9))",
+   "file": "repair_area_square.ipynb",
+   "good_ret": "s * s",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(area_square(9))"
+  }
+ },
+ {
+  "id": "x4_nameerror_has_digit",
+  "family": "debug_nb",
+  "bug": "nameerror",
+  "tier": "T2X",
+  "instruction": "The notebook repair_has_digit.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (has_digit(s) should return True if the text contains a digit.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_has_digit.ipynb"
+   ],
+   "term": [
+    118,
+    152
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "has_digit",
+    "tests": [
+     [
+      [
+       "a1"
+      ],
+      true
+     ],
+     [
+      [
+       "ab"
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_has_digit.ipynb",
+    "strict_name": true,
+    "test_line": "print(has_digit('r2d2'))"
+   }
+  },
+  "solution": {
+   "code": "def has_digit(s):\n    return any(c.isdigit() for c in s)\nprint(has_digit('r2d2'))",
+   "bad": "def has_digit(s):\n    return any(c.isdigit() for c in s)\nprint(has_digi('r2d2'))",
+   "file": "repair_has_digit.ipynb",
+   "good_ret": "any(c.isdigit() for c in s)",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(has_digit('r2d2'))"
+  }
+ },
+ {
+  "id": "x4_nameerror_first_word",
+  "family": "debug_nb",
+  "bug": "nameerror",
+  "tier": "T2X",
+  "instruction": "The notebook repair_first_word.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (first_word(s) should return the first word of a sentence.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_first_word.ipynb"
+   ],
+   "term": [
+    187,
+    135
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "first_word",
+    "tests": [
+     [
+      [
+       "hi there"
+      ],
+      "hi"
+     ],
+     [
+      [
+       "one"
+      ],
+      "one"
+     ]
+    ],
+    "expected_output": "blue",
+    "notebook": "repair_first_word.ipynb",
+    "strict_name": true,
+    "test_line": "print(first_word('blue sky today'))"
+   }
+  },
+  "solution": {
+   "code": "# helper: first_word\ndef first_word(s):\n    return s.split()[0]\nprint(first_word('blue sky today'))",
+   "bad": "# helper: first_word\ndef first_word(s):\n    return s.split()[0]\nprint(first_wor('blue sky today'))",
+   "file": "repair_first_word.ipynb",
+   "good_ret": "s.split()[0]",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(first_word('blue sky today'))"
+  }
+ },
+ {
+  "id": "x4_wrong_op_per_person",
+  "family": "debug_nb",
+  "bug": "wrong_op",
+  "tier": "T2X",
+  "instruction": "The notebook repair_per_person.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (per_person(total_cost, people) should return the cost split equally between people.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_per_person.ipynb"
+   ],
+   "term": [
+    57,
+    81
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "per_person",
+    "tests": [
+     [
+      [
+       100,
+       4
+      ],
+      25.0
+     ],
+     [
+      [
+       9,
+       3
+      ],
+      3.0
+     ]
+    ],
+    "expected_output": "20.0",
+    "notebook": "repair_per_person.ipynb",
+    "strict_name": true,
+    "test_line": "print(per_person(60, 3))"
+   }
+  },
+  "solution": {
+   "code": "def per_person(total_cost, people):\n    return total_cost / people\nprint(per_person(60, 3))",
+   "bad": "def per_person(total_cost, people):\n    return total_cost * people\nprint(per_person(60, 3))",
+   "file": "repair_per_person.ipynb",
+   "good_ret": "total_cost / people",
+   "bad_ret": "total_cost * people",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(per_person(60, 3))"
+  }
+ },
+ {
+  "id": "x4_wrong_op_cube_it",
+  "family": "debug_nb",
+  "bug": "wrong_op",
+  "tier": "T2X",
+  "instruction": "The notebook repair_cube_it.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (cube_it(n) should return n cubed.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_cube_it.ipynb"
+   ],
+   "term": [
+    166,
+    127
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "cube_it",
+    "tests": [
+     [
+      [
+       2
+      ],
+      8
+     ],
+     [
+      [
+       3
+      ],
+      27
+     ]
+    ],
+    "expected_output": "64",
+    "notebook": "repair_cube_it.ipynb",
+    "strict_name": true,
+    "test_line": "print(cube_it(4))"
+   }
+  },
+  "solution": {
+   "code": "# helper: cube_it\ndef cube_it(n):\n    return n ** 3\nprint(cube_it(4))",
+   "bad": "# helper: cube_it\ndef cube_it(n):\n    return n * 3\nprint(cube_it(4))",
+   "file": "repair_cube_it.ipynb",
+   "good_ret": "n ** 3",
+   "bad_ret": "n * 3",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(cube_it(4))"
+  }
+ },
+ {
+  "id": "x4_wrong_op_half_sum",
+  "family": "debug_nb",
+  "bug": "wrong_op",
+  "tier": "T2X",
+  "instruction": "The notebook repair_half_sum.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (half_sum(a, b) should return the sum of two numbers divided by two.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_half_sum.ipynb"
+   ],
+   "term": [
+    74,
+    1
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "half_sum",
+    "tests": [
+     [
+      [
+       4,
+       6
+      ],
+      5.0
+     ],
+     [
+      [
+       1,
+       1
+      ],
+      1.0
+     ]
+    ],
+    "expected_output": "7.0",
+    "notebook": "repair_half_sum.ipynb",
+    "strict_name": true,
+    "test_line": "print(half_sum(9, 5))"
+   }
+  },
+  "solution": {
+   "code": "def half_sum(a, b):\n    return (a + b) / 2\n\nprint(half_sum(9, 5))",
+   "bad": "def half_sum(a, b):\n    return (a - b) / 2\n\nprint(half_sum(9, 5))",
+   "file": "repair_half_sum.ipynb",
+   "good_ret": "(a + b) / 2",
+   "bad_ret": "(a - b) / 2",
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(half_sum(9, 5))"
+  }
+ },
+ {
+  "id": "x4_wrong_op_profit",
+  "family": "debug_nb",
+  "bug": "wrong_op",
+  "tier": "T2X",
+  "instruction": "The notebook repair_profit.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (profit(sales, cost) should return sales minus cost.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_profit.ipynb"
+   ],
+   "term": [
+    40,
+    103
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "profit",
+    "tests": [
+     [
+      [
+       10,
+       4
+      ],
+      6
+     ],
+     [
+      [
+       5,
+       5
+      ],
+      0
+     ]
+    ],
+    "expected_output": "180",
+    "notebook": "repair_profit.ipynb",
+    "strict_name": true,
+    "test_line": "print(profit(300, 120))"
+   }
+  },
+  "solution": {
+   "code": "def profit(sales, cost):\n    return sales - cost\nprint(profit(300, 120))",
+   "bad": "def profit(sales, cost):\n    return cost - sales\nprint(profit(300, 120))",
+   "file": "repair_profit.ipynb",
+   "good_ret": "sales - cost",
+   "bad_ret": "cost - sales",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(profit(300, 120))"
+  }
+ },
+ {
+  "id": "x4_wrong_op_kg_to_g",
+  "family": "debug_nb",
+  "bug": "wrong_op",
+  "tier": "T2X",
+  "instruction": "The notebook repair_kg_to_g.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (kg_to_g(kg) should return kilograms converted to grams.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_kg_to_g.ipynb"
+   ],
+   "term": [
+    206,
+    97
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "kg_to_g",
+    "tests": [
+     [
+      [
+       2
+      ],
+      2000
+     ],
+     [
+      [
+       0.5
+      ],
+      500.0
+     ]
+    ],
+    "expected_output": "3500.0",
+    "notebook": "repair_kg_to_g.ipynb",
+    "strict_name": true,
+    "test_line": "print(kg_to_g(3.5))"
+   }
+  },
+  "solution": {
+   "code": "# helper: kg_to_g\ndef kg_to_g(kg):\n    return kg * 1000\nprint(kg_to_g(3.5))",
+   "bad": "# helper: kg_to_g\ndef kg_to_g(kg):\n    return kg / 1000\nprint(kg_to_g(3.5))",
+   "file": "repair_kg_to_g.ipynb",
+   "good_ret": "kg * 1000",
+   "bad_ret": "kg / 1000",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(kg_to_g(3.5))"
+  }
+ },
+ {
+  "id": "x4_off_by_one_countdown",
+  "family": "debug_nb",
+  "bug": "off_by_one",
+  "tier": "T2X",
+  "instruction": "The notebook repair_countdown.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (countdown(n) should return the numbers from n down to 1.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_countdown.ipynb"
+   ],
+   "term": [
+    294,
+    161
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "countdown",
+    "tests": [
+     [
+      [
+       3
+      ],
+      [
+       3,
+       2,
+       1
+      ]
+     ],
+     [
+      [
+       1
+      ],
+      [
+       1
+      ]
+     ]
+    ],
+    "expected_output": "[5, 4, 3, 2, 1]",
+    "notebook": "repair_countdown.ipynb",
+    "strict_name": true,
+    "test_line": "print(countdown(5))"
+   }
+  },
+  "solution": {
+   "code": "def countdown(n):\n    return list(range(n, 0, -1))\nprint(countdown(5))",
+   "bad": "def countdown(n):\n    return list(range(n, 1, -1))\nprint(countdown(5))",
+   "file": "repair_countdown.ipynb",
+   "good_ret": "list(range(n, 0, -1))",
+   "bad_ret": "list(range(n, 1, -1))",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(countdown(5))"
+  }
+ },
+ {
+  "id": "x4_off_by_one_between",
+  "family": "debug_nb",
+  "bug": "off_by_one",
+  "tier": "T2X",
+  "instruction": "The notebook repair_between.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (between(a, b) should return all whole numbers from a to b inclusive.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_between.ipynb"
+   ],
+   "term": [
+    259,
+    114
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "between",
+    "tests": [
+     [
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       2,
+       3
+      ]
+     ],
+     [
+      [
+       2,
+       2
+      ],
+      [
+       2
+      ]
+     ]
+    ],
+    "expected_output": "[4, 5, 6, 7]",
+    "notebook": "repair_between.ipynb",
+    "strict_name": true,
+    "test_line": "print(between(4, 7))"
+   }
+  },
+  "solution": {
+   "code": "# helper: between\ndef between(a, b):\n    return list(range(a, b + 1))\nprint(between(4, 7))",
+   "bad": "# helper: between\ndef between(a, b):\n    return list(range(a, b))\nprint(between(4, 7))",
+   "file": "repair_between.ipynb",
+   "good_ret": "list(range(a, b + 1))",
+   "bad_ret": "list(range(a, b))",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(between(4, 7))"
+  }
+ },
+ {
+  "id": "x4_off_by_one_squares_to",
+  "family": "debug_nb",
+  "bug": "off_by_one",
+  "tier": "T2X",
+  "instruction": "The notebook repair_squares_to.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (squares_to(n) should return the squares of 1 to n.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_squares_to.ipynb"
+   ],
+   "term": [
+    112,
+    56
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "squares_to",
+    "tests": [
+     [
+      [
+       3
+      ],
+      [
+       1,
+       4,
+       9
+      ]
+     ],
+     [
+      [
+       1
+      ],
+      [
+       1
+      ]
+     ]
+    ],
+    "expected_output": "[1, 4, 9, 16]",
+    "notebook": "repair_squares_to.ipynb",
+    "strict_name": true,
+    "test_line": "print(squares_to(4))"
+   }
+  },
+  "solution": {
+   "code": "def squares_to(n):\n    return [i * i for i in range(1, n + 1)]\n\nprint(squares_to(4))",
+   "bad": "def squares_to(n):\n    return [i * i for i in range(1, n)]\n\nprint(squares_to(4))",
+   "file": "repair_squares_to.ipynb",
+   "good_ret": "[i * i for i in range(1, n + 1)]",
+   "bad_ret": "[i * i for i in range(1, n)]",
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(squares_to(4))"
+  }
+ },
+ {
+  "id": "x4_off_by_one_index_of_last",
+  "family": "debug_nb",
+  "bug": "off_by_one",
+  "tier": "T2X",
+  "instruction": "The notebook repair_index_of_last.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (index_of_last(vals) should return the index of the last item in a list.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_index_of_last.ipynb"
+   ],
+   "term": [
+    80,
+    177
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "index_of_last",
+    "tests": [
+     [
+      [
+       [
+        1,
+        2,
+        3
+       ]
+      ],
+      2
+     ],
+     [
+      [
+       [
+        5
+       ]
+      ],
+      0
+     ]
+    ],
+    "expected_output": "4",
+    "notebook": "repair_index_of_last.ipynb",
+    "strict_name": true,
+    "test_line": "print(index_of_last([3, 3, 3, 3, 3]))"
+   }
+  },
+  "solution": {
+   "code": "def index_of_last(vals):\n    return len(vals) - 1\nprint(index_of_last([3, 3, 3, 3, 3]))",
+   "bad": "def index_of_last(vals):\n    return len(vals)\nprint(index_of_last([3, 3, 3, 3, 3]))",
+   "file": "repair_index_of_last.ipynb",
+   "good_ret": "len(vals) - 1",
+   "bad_ret": "len(vals)",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(index_of_last([3, 3, 3, 3, 3]))"
+  }
+ },
+ {
+  "id": "x4_off_by_one_prefix3",
+  "family": "debug_nb",
+  "bug": "off_by_one",
+  "tier": "T2X",
+  "instruction": "The notebook repair_prefix3.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (prefix3(s) should return the first three characters of the text.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_prefix3.ipynb"
+   ],
+   "term": [
+    75,
+    188
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "prefix3",
+    "tests": [
+     [
+      [
+       "abcdef"
+      ],
+      "abc"
+     ],
+     [
+      [
+       "xy"
+      ],
+      "xy"
+     ]
+    ],
+    "expected_output": "key",
+    "notebook": "repair_prefix3.ipynb",
+    "strict_name": true,
+    "test_line": "print(prefix3('keyboard'))"
+   }
+  },
+  "solution": {
+   "code": "# helper: prefix3\ndef prefix3(s):\n    return s[:3]\nprint(prefix3('keyboard'))",
+   "bad": "# helper: prefix3\ndef prefix3(s):\n    return s[:4]\nprint(prefix3('keyboard'))",
+   "file": "repair_prefix3.ipynb",
+   "good_ret": "s[:3]",
+   "bad_ret": "s[:4]",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(prefix3('keyboard'))"
+  }
+ },
+ {
+  "id": "x4_wrong_cmp_long_word",
+  "family": "debug_nb",
+  "bug": "wrong_cmp",
+  "tier": "T2X",
+  "instruction": "The notebook repair_long_word.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (long_word(w) should return True if a word has at least 5 letters.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_long_word.ipynb"
+   ],
+   "term": [
+    2,
+    85
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "long_word",
+    "tests": [
+     [
+      [
+       "apple"
+      ],
+      true
+     ],
+     [
+      [
+       "fig"
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_long_word.ipynb",
+    "strict_name": true,
+    "test_line": "print(long_word('grape'))"
+   }
+  },
+  "solution": {
+   "code": "def long_word(w):\n    return len(w) >= 5\nprint(long_word('grape'))",
+   "bad": "def long_word(w):\n    return len(w) > 5\nprint(long_word('grape'))",
+   "file": "repair_long_word.ipynb",
+   "good_ret": "len(w) >= 5",
+   "bad_ret": "len(w) > 5",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(long_word('grape'))"
+  }
+ },
+ {
+  "id": "x4_wrong_cmp_floor_zero",
+  "family": "debug_nb",
+  "bug": "wrong_cmp",
+  "tier": "T2X",
+  "instruction": "The notebook repair_floor_zero.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (floor_zero(n) should return n, or 0 if n is negative.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_floor_zero.ipynb"
+   ],
+   "term": [
+    159,
+    3
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "floor_zero",
+    "tests": [
+     [
+      [
+       -3
+      ],
+      0
+     ],
+     [
+      [
+       5
+      ],
+      5
+     ]
+    ],
+    "expected_output": "7",
+    "notebook": "repair_floor_zero.ipynb",
+    "strict_name": true,
+    "test_line": "print(floor_zero(7))"
+   }
+  },
+  "solution": {
+   "code": "# helper: floor_zero\ndef floor_zero(n):\n    return n if n > 0 else 0\nprint(floor_zero(7))",
+   "bad": "# helper: floor_zero\ndef floor_zero(n):\n    return n if n < 0 else 0\nprint(floor_zero(7))",
+   "file": "repair_floor_zero.ipynb",
+   "good_ret": "n if n > 0 else 0",
+   "bad_ret": "n if n < 0 else 0",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(floor_zero(7))"
+  }
+ },
+ {
+  "id": "x4_wrong_cmp_is_teen",
+  "family": "debug_nb",
+  "bug": "wrong_cmp",
+  "tier": "T2X",
+  "instruction": "The notebook repair_is_teen.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (is_teen(age) should return True if age is 13 to 19 inclusive.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_is_teen.ipynb"
+   ],
+   "term": [
+    274,
+    178
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "is_teen",
+    "tests": [
+     [
+      [
+       13
+      ],
+      true
+     ],
+     [
+      [
+       20
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_is_teen.ipynb",
+    "strict_name": true,
+    "test_line": "print(is_teen(19))"
+   }
+  },
+  "solution": {
+   "code": "def is_teen(age):\n    return 13 <= age <= 19\n\nprint(is_teen(19))",
+   "bad": "def is_teen(age):\n    return 13 < age < 19\n\nprint(is_teen(19))",
+   "file": "repair_is_teen.ipynb",
+   "good_ret": "13 <= age <= 19",
+   "bad_ret": "13 < age < 19",
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(is_teen(19))"
+  }
+ },
+ {
+  "id": "x4_wrong_cmp_in_range",
+  "family": "debug_nb",
+  "bug": "wrong_cmp",
+  "tier": "T2X",
+  "instruction": "The notebook repair_in_range.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (in_range(n) should return True if n is between 1 and 10 inclusive.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_in_range.ipynb"
+   ],
+   "term": [
+    108,
+    155
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "in_range",
+    "tests": [
+     [
+      [
+       1
+      ],
+      true
+     ],
+     [
+      [
+       11
+      ],
+      false
+     ]
+    ],
+    "expected_output": "True",
+    "notebook": "repair_in_range.ipynb",
+    "strict_name": true,
+    "test_line": "print(in_range(10))"
+   }
+  },
+  "solution": {
+   "code": "def in_range(n):\n    return 1 <= n <= 10\nprint(in_range(10))",
+   "bad": "def in_range(n):\n    return 1 < n < 10\nprint(in_range(10))",
+   "file": "repair_in_range.ipynb",
+   "good_ret": "1 <= n <= 10",
+   "bad_ret": "1 < n < 10",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(in_range(10))"
+  }
+ },
+ {
+  "id": "x4_wrong_cmp_cap_at_100",
+  "family": "debug_nb",
+  "bug": "wrong_cmp",
+  "tier": "T2X",
+  "instruction": "The notebook repair_cap_at_100.ipynb in the home folder has a bug. Open it in Jupyter, run it, read the error or wrong output, fix the code, run it again so it prints the correct result, and save it. (cap_at_100(n) should return n, but never more than 100.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_cap_at_100.ipynb"
+   ],
+   "term": [
+    66,
+    42
+   ]
+  },
+  "checker": {
+   "type": "notebook_function_intact",
+   "args": {
+    "func": "cap_at_100",
+    "tests": [
+     [
+      [
+       50
+      ],
+      50
+     ],
+     [
+      [
+       150
+      ],
+      100
+     ]
+    ],
+    "expected_output": "42",
+    "notebook": "repair_cap_at_100.ipynb",
+    "strict_name": true,
+    "test_line": "print(cap_at_100(42))"
+   }
+  },
+  "solution": {
+   "code": "# helper: cap_at_100\ndef cap_at_100(n):\n    return n if n < 100 else 100\nprint(cap_at_100(42))",
+   "bad": "# helper: cap_at_100\ndef cap_at_100(n):\n    return n if n > 100 else 100\nprint(cap_at_100(42))",
+   "file": "repair_cap_at_100.ipynb",
+   "good_ret": "n if n < 100 else 100",
+   "bad_ret": "n if n > 100 else 100",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(cap_at_100(42))"
+  }
+ },
+ {
+  "id": "x4_py_terminal_feet_to_m",
+  "family": "debug_py",
+  "bug": "py_terminal",
+  "tier": "T2X",
+  "instruction": "The script repair_feet_to_m.py in the current folder has a bug. Run it with python3 in the terminal, read the error or wrong output, fix the bug in repair_feet_to_m.py without changing the print line, and run it again until it prints the correct result. (feet_to_m(ft) should return feet converted to metres.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_feet_to_m.py"
+   ],
+   "term": [
+    96,
+    139
+   ]
+  },
+  "checker": {
+   "type": "py_script_intact",
+   "args": {
+    "file": "repair_feet_to_m.py",
+    "expected_stdout": "1.524",
+    "func": "feet_to_m",
+    "tests": [
+     [
+      [
+       10
+      ],
+      3.048
+     ],
+     [
+      [
+       0
+      ],
+      0.0
+     ]
+    ],
+    "min_runs": 2,
+    "test_line": "print(feet_to_m(5))"
+   }
+  },
+  "solution": {
+   "code": "def feet_to_m(ft):\n    return ft * 0.3048\nprint(feet_to_m(5))",
+   "bad": "def feet_to_m(ft):\n    return ft + 0.3048\nprint(feet_to_m(5))",
+   "file": "repair_feet_to_m.py",
+   "good_ret": "ft * 0.3048",
+   "bad_ret": "ft + 0.3048",
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(feet_to_m(5))"
+  }
+ },
+ {
+  "id": "x4_py_terminal_unique_count",
+  "family": "debug_py",
+  "bug": "py_terminal",
+  "tier": "T2X",
+  "instruction": "The script repair_unique_count.py in the current folder has a bug. Run it with python3 in the terminal, read the error or wrong output, fix the bug in repair_unique_count.py without changing the print line, and run it again until it prints the correct result. (unique_count(vals) should return how many distinct items a list has.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_unique_count.py"
+   ],
+   "term": [
+    8,
+    19
+   ]
+  },
+  "checker": {
+   "type": "py_script_intact",
+   "args": {
+    "file": "repair_unique_count.py",
+    "expected_stdout": "3",
+    "func": "unique_count",
+    "tests": [
+     [
+      [
+       [
+        1,
+        1,
+        2
+       ]
+      ],
+      2
+     ],
+     [
+      [
+       []
+      ],
+      0
+     ]
+    ],
+    "min_runs": 2,
+    "test_line": "print(unique_count([4, 4, 5, 6, 6]))"
+   }
+  },
+  "solution": {
+   "code": "# helper: unique_count\ndef unique_count(vals):\n    return len(set(vals))\nprint(unique_count([4, 4, 5, 6, 6]))",
+   "bad": "# helper: unique_count\ndef unique_count(vals):\n    return len(set(vals))\nprint(unique_coun([4, 4, 5, 6, 6]))",
+   "file": "repair_unique_count.py",
+   "good_ret": "len(set(vals))",
+   "bad_ret": null,
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(unique_count([4, 4, 5, 6, 6]))"
+  }
+ },
+ {
+  "id": "x4_py_terminal_mid_char",
+  "family": "debug_py",
+  "bug": "py_terminal",
+  "tier": "T2X",
+  "instruction": "The script repair_mid_char.py in the current folder has a bug. Run it with python3 in the terminal, read the error or wrong output, fix the bug in repair_mid_char.py without changing the print line, and run it again until it prints the correct result. (mid_char(s) should return the middle character of the text.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_mid_char.py"
+   ],
+   "term": [
+    61,
+    24
+   ]
+  },
+  "checker": {
+   "type": "py_script_intact",
+   "args": {
+    "file": "repair_mid_char.py",
+    "expected_stdout": "y",
+    "func": "mid_char",
+    "tests": [
+     [
+      [
+       "abc"
+      ],
+      "b"
+     ],
+     [
+      [
+       "abcd"
+      ],
+      "c"
+     ]
+    ],
+    "min_runs": 2,
+    "test_line": "print(mid_char('kayak'))"
+   }
+  },
+  "solution": {
+   "code": "def mid_char(s):\n    return s[len(s) // 2]\n\nprint(mid_char('kayak'))",
+   "bad": "def mid_char(s):\n    return s[len(s) // 2]\n\nprint(mid_cha('kayak'))",
+   "file": "repair_mid_char.py",
+   "good_ret": "s[len(s) // 2]",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 2,
+   "test_line": "print(mid_char('kayak'))"
+  }
+ },
+ {
+  "id": "x4_py_terminal_initials",
+  "family": "debug_py",
+  "bug": "py_terminal",
+  "tier": "T2X",
+  "instruction": "The script repair_initials.py in the current folder has a bug. Run it with python3 in the terminal, read the error or wrong output, fix the bug in repair_initials.py without changing the print line, and run it again until it prints the correct result. (initials(s) should return the first letter of each word.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_initials.py"
+   ],
+   "term": [
+    200,
+    136
+   ]
+  },
+  "checker": {
+   "type": "py_script_intact",
+   "args": {
+    "file": "repair_initials.py",
+    "expected_stdout": "gbh",
+    "func": "initials",
+    "tests": [
+     [
+      [
+       "ada lovelace"
+      ],
+      "al"
+     ],
+     [
+      [
+       "x"
+      ],
+      "x"
+     ]
+    ],
+    "min_runs": 2,
+    "test_line": "print(initials('grace brewster hopper'))"
+   }
+  },
+  "solution": {
+   "code": "def initials(s):\n    return ''.join(w[0] for w in s.split())\nprint(initials('grace brewster hopper'))",
+   "bad": "def initials(s):\n    return ''.join(w[0] for w in s.split())\nprint(initial('grace brewster hopper'))",
+   "file": "repair_initials.py",
+   "good_ret": "''.join(w[0] for w in s.split())",
+   "bad_ret": null,
+   "comment_lines": 0,
+   "layout": 0,
+   "test_line": "print(initials('grace brewster hopper'))"
+  }
+ },
+ {
+  "id": "x4_py_terminal_perimeter_rect",
+  "family": "debug_py",
+  "bug": "py_terminal",
+  "tier": "T2X",
+  "instruction": "The script repair_perimeter_rect.py in the current folder has a bug. Run it with python3 in the terminal, read the error or wrong output, fix the bug in repair_perimeter_rect.py without changing the print line, and run it again until it prints the correct result. (perimeter_rect(w, h) should return the perimeter of a rectangle.)",
+  "max_steps": 40,
+  "start": {
+   "files": [
+    "repair_perimeter_rect.py"
+   ],
+   "term": [
+    256,
+    13
+   ]
+  },
+  "checker": {
+   "type": "py_script_intact",
+   "args": {
+    "file": "repair_perimeter_rect.py",
+    "expected_stdout": "20",
+    "func": "perimeter_rect",
+    "tests": [
+     [
+      [
+       2,
+       3
+      ],
+      10
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      0
+     ]
+    ],
+    "min_runs": 2,
+    "test_line": "print(perimeter_rect(6, 4))"
+   }
+  },
+  "solution": {
+   "code": "# helper: perimeter_rect\ndef perimeter_rect(w, h):\n    return 2 * (w + h)\nprint(perimeter_rect(6, 4))",
+   "bad": "# helper: perimeter_rect\ndef perimeter_rect(w, h):\n    return 2 + (w + h)\nprint(perimeter_rect(6, 4))",
+   "file": "repair_perimeter_rect.py",
+   "good_ret": "2 * (w + h)",
+   "bad_ret": "2 + (w + h)",
+   "comment_lines": 1,
+   "layout": 1,
+   "test_line": "print(perimeter_rect(6, 4))"
+  }
+ }
+]

@@ -1,0 +1,8 @@
+torch==2.7.0
+torchvision==0.22.0
+transformers==4.53.2
+peft==0.16.0
+accelerate==1.8.1
+pillow
+qwen-vl-utils==0.0.11
+huggingface_hub[hf_transfer]==0.34.4
