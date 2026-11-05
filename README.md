@@ -13,6 +13,8 @@ The model is [Qwen2.5-VL-7B](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct)
 
 The test sets below were locked before training. None of them were used as training data.
 
+I wrote a longer walkthrough of how I did this in [article.md](article.md).
+
 ## Results
 
 Two locked test sets, each run 3 times at temperature 0.2.
