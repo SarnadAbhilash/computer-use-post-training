@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching a 7B vision-language model to use a computer</title>
+<meta name="description" content="How I post-trained Qwen2.5-VL-7B to open Jupyter, run code, and fix errors. What failed, what I changed, and the measured results.">
+<meta property="og:title" content="Teaching a 7B vision-language model to use a computer">
+<meta property="og:description" content="Post-training Qwen2.5-VL-7B with fine-tuning and RL to open Jupyter, run code, and fix errors. Measured on two frozen test sets.">
+<meta property="og:image" content="https://sarnadabhilash.github.io/computer-use-post-training/media/banner.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Project write-up · Abhilash Sarnad</p>
+    <h1>Teaching a 7B vision-language model to use a computer</h1>
+    <p class="lead">I trained an open model (Qwen2.5-VL-7B) to open Jupyter, write and run code, read errors, and fix them. It looks at screenshots and sends clicks and keystrokes.</p>
+    <div class="links">
+      <a class="btn" href="https://github.com/SarnadAbhilash/computer-use-post-training">Code on GitHub</a>
+      <a class="btn ghost" href="https://github.com/SarnadAbhilash/computer-use-post-training/blob/main/article.md">Full write-up</a>
+    </div>
+    <img class="banner" src="media/banner.jpg" alt="Three screens from one run: open Jupyter, read a NameError, rerun a passing fix">
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#short">In short</a>
+    <a href="#built">What I built</a>
+    <a href="#tested">How I tested it</a>
+    <a href="#failing">What was failing</a>
+    <a href="#changed">What I changed</a>
+    <a href="#results">Results</a>
+    <a href="#didnt">What didn't work</a>
+    <a href="#files">Files</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="short">
+  <h2>In short</h2>
+  <div class="stats">
+    <div class="stat"><span class="num">0 → 21</span><span class="lbl">tasks passed out of 24<br>(untrained → after fine-tuning)</span></div>
+    <div class="stat"><span class="num">13% → 70%</span><span class="lbl">debugging tasks passed<br>(35-task debug set)</span></div>
+    <div class="stat"><span class="num">30 → 10.7</span><span class="lbl">false "done" reports per run<br>(on the debug set)</span></div>
+  </div>
+  <p class="note">All numbers are the mean of 3 runs at temperature 0.2, on test sets the model never trained on.</p>
+
+  <h3>Before and after, on the same task</h3>
+  <p>The task: a notebook cell has a typo (<code>has_digi</code> instead of <code>has_digit</code>). The model has to run it, see the error, fix it, and run it again.</p>
+  <video controls muted playsinline preload="metadata" poster="media/banner.jpg">
+    <source src="media/before-after-captioned.mp4" type="video/mp4">
+  </video>
+  <p class="caption">Sped-up, captioned comparison (about 50 seconds). The earlier model fails. The final model fixes the line and the cell prints <code>True</code>.</p>
+</section>
+
+<section id="built">
+  <h2>1. What I built</h2>
+  <ul>
+    <li>Model: <strong>Qwen2.5-VL-7B</strong>, trained with LoRA (rank 16).</li>
+    <li>Input: a screenshot of the desktop.</li>
+    <li>Output: one UI action at a time, like a click or a keystroke.</li>
+    <li>Goal: finish a simple coding loop in Jupyter on its own.</li>
+  </ul>
+  <p>Every task follows the same six steps. These clips are from one held-out test task after training.</p>
+
+  <div class="steps">
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/01-open-jupyter.jpg"><source src="media/steps/01-open-jupyter.mp4" type="video/mp4"></video>
+      <figcaption><b>1. Open Jupyter.</b> The model opens the notebook <code>repair_has_digit.ipynb</code>.</figcaption>
+    </figure>
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/02-edit-code.jpg"><source src="media/steps/02-edit-code.mp4" type="video/mp4"></video>
+      <figcaption><b>2. Write or edit code.</b> The cell calls <code>has_digi</code>, which doesn't exist.</figcaption>
+    </figure>
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/03-run.jpg"><source src="media/steps/03-run.mp4" type="video/mp4"></video>
+      <figcaption><b>3. Run it.</b> First run of the cell.</figcaption>
+    </figure>
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/04-read-traceback.jpg"><source src="media/steps/04-read-traceback.mp4" type="video/mp4"></video>
+      <figcaption><b>4. Read the error.</b> <code>NameError: name 'has_digi' is not defined</code>.</figcaption>
+    </figure>
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/05-apply-fix.jpg"><source src="media/steps/05-apply-fix.mp4" type="video/mp4"></video>
+      <figcaption><b>5. Fix it.</b> Changes only that one name to <code>has_digit</code>.</figcaption>
+    </figure>
+    <figure class="step">
+      <video controls muted playsinline preload="none" poster="media/steps/06-run-again.jpg"><source src="media/steps/06-run-again.mp4" type="video/mp4"></video>
+      <figcaption><b>6. Run it again.</b> The cell prints <code>True</code>. Done.</figcaption>
+    </figure>
+  </div>
+  <p class="note">I used Jupyter because it was the environment I could run reliably.</p>
+</section>
+
+<section id="tested">
+  <h2>2. How I tested it</h2>
+  <p>I froze two test sets <strong>before</strong> training and never trained on them.</p>
+  <div class="cards">
+    <div class="card">
+      <h4>Original 24</h4>
+      <p>Write a new function, debug a file, handle a changed window layout, or work only in the terminal.</p>
+    </div>
+    <div class="card">
+      <h4>Debug 35</h4>
+      <p>7 bug types, 5 tasks each: syntax, indentation, name errors, wrong operator, off-by-one, wrong comparison, and a Python file fixed from the terminal.</p>
+    </div>
+  </div>
+  <ul>
+    <li>A script checks the files on disk. For example: does the function exist, does the script print the right output?</li>
+    <li>If the model says "done" but the check fails, it counts as a <strong>fail</strong>.</li>
+    <li>I also count those cases on their own as <strong>false "done" reports</strong>.</li>
+    <li>Each trained model ran each test set 3 times. I report the average.</li>
+  </ul>
+  <p class="note">The test files have checksums in the repo, so anyone can confirm they didn't change.</p>
+</section>
+
+<section id="failing">
+  <h2>3. What was failing</h2>
+  <ul>
+    <li>The untrained model passed <strong>0 of 24</strong> tasks (one earlier run).</li>
+    <li>I recorded good examples of the loop and fine-tuned on them. That got it to <strong>17.0 / 24</strong>.</li>
+    <li>But on the debug set it passed only <strong>4.7 / 35 (13%)</strong>.</li>
+    <li>And it said "done" about <strong>30 times per run</strong> when the file was still broken.</li>
+  </ul>
+  <div class="split">
+    <figure>
+      <img src="media/before.gif" alt="The earlier model failing the NameError task" loading="lazy">
+      <figcaption>The earlier model on the NameError task. It doesn't fix it.</figcaption>
+    </figure>
+    <div>
+      <h4>Common mistakes</h4>
+      <ul class="bad">
+        <li>Edited the wrong line.</li>
+        <li>Rewrote the test instead of the code.</li>
+        <li>Applied a fix but never reran the file.</li>
+        <li>Saw an error and said "done" anyway.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="changed">
+  <h2>4. What I changed</h2>
+
+  <h3>Step A: better examples to learn from</h3>
+  <p>I recorded new demonstrations that follow one simple rule:</p>
+  <ol class="rule">
+    <li>Change only the buggy line.</li>
+    <li>Run the file.</li>
+    <li>Read the output.</li>
+    <li>Stop.</li>
+  </ol>
+  <ul>
+    <li>Debug set: <strong>13% → 61%</strong> (4.7 → 21.3 out of 35).</li>
+    <li>False "done": <strong>30.0 → 13.7</strong> per run.</li>
+    <li>Original 24: <strong>17.0 → 21.0</strong>.</li>
+  </ul>
+  <figure>
+    <img src="media/debug_by_type.png" alt="Debug-set pass rate by bug type for each model" loading="lazy">
+    <figcaption>Passes per bug type (out of 5). Grey is the first fine-tune, blue is after better examples, green is after RL. The gains were uneven across bug types.</figcaption>
+  </figure>
+
+  <h3>Step B: reinforcement learning (GRPO)</h3>
+  <ul>
+    <li>For each task, the model tried <strong>8 times</strong>.</li>
+    <li>Attempts that passed the check were pushed up.</li>
+    <li>Failures and early quits were pushed down.</li>
+    <li>A penalty kept it from drifting too far from the fine-tuned model.</li>
+  </ul>
+  <p>After one round:</p>
+  <ul>
+    <li>Debug set: <strong>61% → 70%</strong> (21.3 → 24.3 out of 35).</li>
+    <li>False "done": <strong>13.7 → 10.7</strong> per run.</li>
+    <li>Most of the gain was on name errors (2.7 → 4.7 out of 5).</li>
+  </ul>
+  <div class="split">
+    <figure>
+      <img src="media/after.gif" alt="The final model fixing the NameError task" loading="lazy">
+      <figcaption>After RL, the same NameError task. It fixes the name and reruns the cell.</figcaption>
+    </figure>
+    <figure>
+      <img src="media/before.gif" alt="The earlier model failing the NameError task" loading="lazy">
+      <figcaption>For comparison, the earlier model on that task.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="results">
+  <h2>5. Results</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Model</th><th>Original 24</th><th>Debug 35</th><th>False "done" (debug)</th></tr></thead>
+    <tbody>
+      <tr><td>Untrained</td><td>0 / 24</td><td>–</td><td>–</td></tr>
+      <tr><td>First fine-tune</td><td>17.0 / 24 (71%)</td><td>4.7 / 35 (13%)</td><td>30.0</td></tr>
+      <tr><td>Better examples</td><td><strong>21.0 / 24 (88%)</strong></td><td>21.3 / 35 (61%)</td><td>13.7</td></tr>
+      <tr><td>One round of RL</td><td>20.7 / 24 (86%)</td><td><strong>24.3 / 35 (70%)</strong></td><td><strong>10.7</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Mean of 3 runs at temperature 0.2. The untrained score is from one earlier run on the same 24 tasks.</p>
+
+  <div class="bars" aria-label="Debug set pass rate">
+    <h4>Debug set pass rate</h4>
+    <div class="bar"><span class="name">First fine-tune</span><span class="track"><span class="fill grey" style="width:13%"></span></span><span class="val">13%</span></div>
+    <div class="bar"><span class="name">Better examples</span><span class="track"><span class="fill blue" style="width:61%"></span></span><span class="val">61%</span></div>
+    <div class="bar"><span class="name">After RL</span><span class="track"><span class="fill green" style="width:70%"></span></span><span class="val">70%</span></div>
+  </div>
+
+  <figure>
+    <img src="media/overall.png" alt="Pass counts and false done counts for each model on both test sets" loading="lazy">
+    <figcaption>Left: original 24. Right: debug 35. Coloured bars are passes, red bars are false "done" reports. The last two models are RL rounds 1 and 2.</figcaption>
+  </figure>
+</section>
+
+<section id="didnt">
+  <h2>6. What didn't work, and what's next</h2>
+  <ul>
+    <li><strong>RL didn't help on the original 24.</strong> It scored 20.7, a little under 21.0 from the better examples.</li>
+    <li><strong>A second RL round added nothing.</strong> It matched the first round on both test sets, so I stopped there.</li>
+    <li><strong>Some bug types are still weak.</strong> Off-by-one bugs pass only about 2 of 5.</li>
+    <li><strong>False "done" is lower but not gone.</strong> About 10.7 per run on the debug set.</li>
+    <li>The biggest single jump came from better examples, not from RL.</li>
+    <li>Everything ran in Jupyter only. Other apps and window layouts are the obvious next test.</li>
+  </ul>
+</section>
+
+<section id="files">
+  <h2>Full recordings and files</h2>
+  <div class="split">
+    <figure>
+      <video controls muted playsinline preload="none"><source src="media/before_sft_v2_nameerror_fail.mp4" type="video/mp4"></video>
+      <figcaption>Full run, earlier model, fails (about 2 min 48 s).</figcaption>
+    </figure>
+    <figure>
+      <video controls muted playsinline preload="none"><source src="media/after_grpo_nameerror_success.mp4" type="video/mp4"></video>
+      <figcaption>Full run, after RL, passes (about 1 min 6 s).</figcaption>
+    </figure>
+  </div>
+  <ul>
+    <li><a href="https://github.com/SarnadAbhilash/computer-use-post-training">GitHub repo</a>: code, frozen tests, charts.</li>
+    <li><a href="https://github.com/SarnadAbhilash/computer-use-post-training/blob/main/article.md">Full write-up</a> (article.md).</li>
+    <li><a href="https://github.com/SarnadAbhilash/computer-use-post-training/blob/main/results/results.md">Detailed results</a>, with standard deviations and per-type counts.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Abhilash Sarnad · <a href="https://github.com/SarnadAbhilash">GitHub</a> · <a href="https://x.com/AbhilashSarnad">X</a></div>
+</footer>
+
+</body>
+</html>
